@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>구독 트래커</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">SUBSCRIPTION TRACKER</p>
+        <h1>한눈에 구독 보기</h1>
+        <p class="subtitle">매달 빠져나가는 비용과 다음 결제일을 간단하게 확인할 수 있어요.</p>
+      </div>
+      <div class="header-mark" aria-hidden="true">₩</div>
+    </header>
+
+    <section class="summary-grid" aria-label="지출 요약">
+      <article class="summary-card summary-primary">
+        <span>월 합계</span>
+        <strong id="monthly-total">0원</strong>
+        <small>매월 예상 지출</small>
+      </article>
+      <article class="summary-card">
+        <span>연간 합계</span>
+        <strong id="yearly-total">0원</strong>
+        <small>1년 예상 지출</small>
+      </article>
+      <article class="summary-card">
+        <span>이번 주 결제 예정</span>
+        <strong id="upcoming-count">0건</strong>
+        <small id="upcoming-label">7일 이내 결제</small>
+      </article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel subscriptions-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">MY SUBSCRIPTIONS</p>
+            <h2>구독 목록</h2>
+          </div>
+          <span id="subscription-count" class="count-badge">0개</span>
+        </div>
+        <div id="subscription-list" class="subscription-list" aria-live="polite"></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel form-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">ADD NEW</p>
+              <h2 id="form-title">새 구독 추가</h2>
+            </div>
+          </div>
+          <form id="subscription-form">
+            <input type="hidden" id="subscription-id" name="subscription-id">
+            <label for="name">서비스 이름</label>
+            <input id="name" name="name" type="text" placeholder="예: 넷플릭스" required maxlength="40">
+
+            <div class="field-row">
+              <div>
+                <label for="amount">금액</label>
+                <input id="amount" name="amount" type="number" min="0" step="100" placeholder="13500" required>
+              </div>
+              <div>
+                <label for="cycle">결제 주기</label>
+                <select id="cycle" name="cycle">
+                  <option value="monthly">매월</option>
+                  <option value="yearly">매년</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="nextPaymentDate">다음 결제일</label>
+            <input id="nextPaymentDate" name="nextPaymentDate" type="date" required>
+
+            <div class="field-row">
+              <div>
+                <label for="category">카테고리</label>
+                <input id="category" name="category" type="text" placeholder="영상" required maxlength="20">
+              </div>
+              <div>
+                <label for="paymentMethod">결제수단</label>
+                <input id="paymentMethod" name="paymentMethod" type="text" placeholder="신한카드" required maxlength="20">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button id="submit-button" class="button button-primary" type="submit">구독 추가</button>
+              <button id="cancel-button" class="button button-muted hidden" type="button">취소</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel category-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">SPENDING MIX</p>
+              <h2>카테고리별 비중</h2>
+            </div>
+          </div>
+          <div id="category-chart" class="category-chart" aria-live="polite"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <script src="js/logic.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
